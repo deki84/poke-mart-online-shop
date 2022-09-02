@@ -13,14 +13,12 @@ function App() {
       .then((data) => setShopInventory(data.results));
   }, []);
 
-  console.log(shopInventory);
-
   return (
     <div className="App">
       <h1>Poke Mart Online Shop</h1>
       <ul>
         {shopInventory.map((item) => {
-          return <ShoppingItem key={item.name} name={item.name} />;
+          return <ShoppingItem key={item.name} url={item.url} />;
         })}
       </ul>
     </div>
