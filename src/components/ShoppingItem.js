@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-
+import styled from "styled-components";
 export default function ShoppingItem({ url }) {
   const [itemDetails, setItemDetails] = useState({});
 
@@ -16,5 +16,14 @@ export default function ShoppingItem({ url }) {
       } );
   }, [])
   
-  return <li><img src={itemDetails.image} alt="" />{itemDetails.name} {itemDetails.cost}</li>;
+  return <Li><img src={itemDetails.image} alt="" />{itemDetails.name} {itemDetails.cost}</Li>;
 }
+const Li=styled.li`
+list-style: none;
+border: 1px solid black;
+padding: 15px;
+width: 120px;
+
+
+`
+
