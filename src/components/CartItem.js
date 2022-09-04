@@ -1,9 +1,15 @@
 import styled from "styled-components";
 
-export default function CartItem({name, itemImage, cost}) {
-    return (
-        <Li><img src={itemImage} alt=""/>{name}</Li>
-    )
+export default function CartItem({ name, itemImage, cost, onRemoveCartItem }) {
+  return (
+    <Li>
+      <img src={itemImage} alt="" />
+      {name}{" "}
+      <button className="deleteButton" onClick={() => onRemoveCartItem(name)}>
+        Remove Item
+      </button>
+    </Li>
+  );
 }
 
 const Li = styled.li`
