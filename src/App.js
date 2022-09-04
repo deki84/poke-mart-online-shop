@@ -10,14 +10,18 @@ function App() {
   const [shopInventory, setShopInventory] = useState([]);
   const [shoppingCart, setShoppingCart] = useState([]);
 
-  function addToCart(newItem){
-    const filteredShoppingItem = shoppingCart.find(item => item.name === newItem.name)
-    if(!filteredShoppingItem) {
+  function addToCart(newItem) {
+    const filteredShoppingItem = shoppingCart.find(
+      (item) => item.name === newItem.name
+    );
+    if (!filteredShoppingItem) {
       return setShoppingCart([newItem, ...shoppingCart]);
+    }
   }
-}
 
-  console.log(shoppingCart);
+  function removeCartItem(name) {
+    setShoppingCart(shoppingCart.filter((item) => item.name !== name));
+  }
 
   useEffect(() => {
     fetch(ApiUrl)
@@ -31,13 +35,27 @@ function App() {
       <h2>Shopping Cart</h2>
       <ul>
         {shoppingCart.map((item) => {
-          return <CartItem key={item.name} name={item.name} cost={item.cost} itemImage={item.image}/>
+          return (
+            <CartItem
+              key={item.name}
+              name={item.name}
+              cost={item.cost}
+              itemImage={item.image}
+              onRemoveCartItem={removeCartItem}
+            />
+          );
         })}
       </ul>
       <h2>Search Items</h2>
       <ul>
         {shopInventory.map((item) => {
-          return <ShoppingItem key={item.name} url={item.url} onAddToCart={addToCart} />;
+          return (
+            <ShoppingItem
+              key={item.name}
+              url={item.url}
+              onAddToCart={addToCart}
+            />
+          );
         })}
       </ul>
     </Div>
