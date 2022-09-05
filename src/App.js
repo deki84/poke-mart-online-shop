@@ -31,9 +31,9 @@ function App() {
 
   return (
     <Div className="App">
-      <h1>Poke Mart Online Shop</h1>
+      <h1>Poké Mart Online Shop</h1>
       <h2>Shopping Cart</h2>
-      <ul>
+      <ul className="shoppingCart">
         {shoppingCart.map((item) => {
           return (
             <CartItem
@@ -47,7 +47,7 @@ function App() {
         })}
       </ul>
       <h2>Search Items</h2>
-      <ul>
+      <ul className="shoppingInventory">
         {shopInventory.map((item) => {
           return (
             <ShoppingItem
@@ -66,9 +66,28 @@ const Div = styled.div`
   width: 100vw;
   margin: 0;
   padding: 0;
+  font-family: monospace;
+
+  h1,
+  h2 {
+    text-align: center;
+  }
 
   h1 {
-    text-align: center;
+    margin-bottom: 3%;
+  }
+
+  .shoppingInventory {
+    background-color: lightgrey;
+    margin: 5%;
+    margin-top: 0;
+    padding: 1%;
+  }
+
+  .shoppingCart {
+    margin-left: 5%;
+    margin-right: 5%;
+    padding: 1%;
   }
 
   ul {

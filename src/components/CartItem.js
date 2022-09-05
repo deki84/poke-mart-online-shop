@@ -14,8 +14,29 @@ export default function CartItem({ name, itemImage, cost, onRemoveCartItem }) {
 
 const Li = styled.li`
   list-style: none;
-  border: 1px solid black;
+  border: 2px solid black;
+  border-radius: 5px;
   padding: 15px;
-  width: 120px;
+  width: 150px;
   margin: 5px;
+  font-weight: bold;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  {name} {
+    color: #324F66;
+    text-transform: uppercase;
+  }
+
+  .deleteButton {
+    margin-top: 5px;
+    font-family: monospace;
+    font-weight: bold;
+    padding 10px 10px;
+    border: none;
+    border-radius: 10px;
+    background-color: tomato;
+    color: white;
+  }
 `;
