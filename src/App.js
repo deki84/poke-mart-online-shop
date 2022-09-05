@@ -4,6 +4,8 @@ import styled from "styled-components";
 import "./App.css";
 import CartItem from "./components/CartItem";
 import ShoppingItem from "./components/ShoppingItem";
+import { Router, Route, Link, Routes } from "react-router-dom";
+import ShoppingCart from "./pages/ShoppingCart";
 
 function App() {
   const ApiUrl = "https://pokeapi.co/api/v2/item/";
@@ -14,9 +16,12 @@ function App() {
     const filteredShoppingItem = shoppingCart.find(
       (item) => item.name === newItem.name
     );
-    if (!filteredShoppingItem) {
-      return setShoppingCart([newItem, ...shoppingCart]);
+    if (filteredShoppingItem) {
+      return;
+    } else {
+      setShoppingCart([newItem, ...shoppingCart]);
     }
+    console.log(shoppingCart);
   }
 
   function removeCartItem(name) {
@@ -32,32 +37,37 @@ function App() {
   return (
     <Div className="App">
       <h1>Poké Mart Online Shop</h1>
-      <h2>Shopping Cart</h2>
-      <ul className="shoppingCart">
-        {shoppingCart.map((item) => {
-          return (
-            <CartItem
-              key={item.name}
-              name={item.name}
-              cost={item.cost}
-              itemImage={item.image}
-              onRemoveCartItem={removeCartItem}
+      <Routes>
+        <Route
+          path="/shopping-cart"
+          element={
+            <ShoppingCart
+              removeCartItem={removeCartItem}
+              shoppingCart={shoppingCart}
             />
-          );
-        })}
-      </ul>
-      <h2>Search Items</h2>
-      <ul className="shoppingInventory">
-        {shopInventory.map((item) => {
-          return (
-            <ShoppingItem
-              key={item.name}
-              url={item.url}
-              onAddToCart={addToCart}
-            />
-          );
-        })}
-      </ul>
+          }
+        ></Route>
+        <Route
+          path="/"
+          element={
+            <>
+              <Link to="/shopping-cart">Go to cart</Link>
+              <h2>Search Items</h2>
+              <ul className="shoppingInventory">
+                {shopInventory.map((item) => {
+                  return (
+                    <ShoppingItem
+                      key={item.name}
+                      url={item.url}
+                      onAddToCart={addToCart}
+                    />
+                  );
+                })}
+              </ul>
+            </>
+          }
+        ></Route>
+      </Routes>
     </Div>
   );
 }
